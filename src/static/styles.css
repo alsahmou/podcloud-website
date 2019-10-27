@@ -1,0 +1,55 @@
+body {
+    background-image: url("Mic.jpg");
+    background-size: cover;
+    background-position: center center fixed;
+    background-repeat: no-repeat;
+    color: #d95700;
+    width: 1240px;
+    margin: 0 auto;
+}
+
+
+
+#title {
+    position: relative;
+    font-size: 70px;
+    color: white;
+}
+
+a {
+    color: #d95700;
+    text-decoration: none;
+    background-color: transparent;
+    font-size: 50px;
+    position: relative;
+    top: 12px;
+
+ }
+    a:hover {
+      color: white;
+      text-decoration: underline; }
+
+
+input {
+    border-color: #d95700;
+    background: transparent;
+    color: #d95700;
+    border-radius: 10px;
+}
+
+
+form {
+    font-size: 30px;
+    position: relative;
+    top: 100px;
+}
+
+.bio-class {
+    height: 200px;
+}
+
+
+.avatar-preview {
+    background-image: url("profilepicture.jpeg");
+
+}

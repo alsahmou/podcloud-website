@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<form method='POST' enctype='multipart/form-data'> {% csrf_token %}
+    <div> Name {{ userForm.name }} {{ userForm.name.errors }}</div>
+    <div> published_date {{ userForm.published_date }} {{ userForm.published_date.errors }}</div>
+    <div> Image {{ userForm.episode_image }} {{userForm.episode_image.errors}}</div>
+    <div> Description {{ userForm.Description }} {{userForm.Description.errors}}</div>
+    <div> episode_mp3 {{ userForm.episode_mp3 }} {{userForm.episode_mp3.errors}}</div>
+    <div class="col">
+        <input type='submit' value='Submit'/>
+    </div>
+</form>
+
+{% endblock %}
