@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +27,7 @@ SECRET_KEY = 'xwsnbn-*i)*t%oi%+%tc8qi-pbs)0kg_4==6ykv1vsoe+jao5r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -78,7 +80,7 @@ WSGI_APPLICATION = 'PodCloud.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'podusers',
+        'NAME': 'podusers', 
         'USER': 'cfe',
         'PASSWORD': 'Ali6101992@',
         'HOST': '127.0.0.1',
