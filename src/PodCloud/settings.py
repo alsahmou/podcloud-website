@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'PodCloud.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'podusers', 
-        'USER': 'cfe',
-        'PASSWORD': 'Ali6101992@',
+        'NAME': 'podcast', 
+        'USER': 'cfa',
+        'PASSWORD': 'password',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
