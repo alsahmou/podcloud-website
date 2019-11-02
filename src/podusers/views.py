@@ -227,15 +227,17 @@ def example(request):
     episodes_media_list = list(Episode.objects.filter(podcast_id = request.GET['id']))
     episodes_list = list(queryset_episode)
     episodes = []
-    ip, is_routable = get_client_ip(request)
+    host_ip = request.get_host()
+    print(host_ip, 'host IP')
+    ip = get_client_ip(request)
     port = request.META['SERVER_PORT']
     #for episode, media in (zip(episodes_list, episodes_media_list)):
     #    episode_details = '<episode name = "' + episode['name'] + '"\n imgurl = ' + '"http://127.0.0.1:8000' + media.episode_image.url + '" \n audiourl = ' + '"http://127.0.0.1:8000' + media.episode_mp3.url + '"\n date = "' + str(episode['published_date']) + '"/>'
     #    episodes.append(episode_details)
     for episode, media in (zip(episodes_list, episodes_media_list)):
-        episode_details = '  <item>' +'\n    <pubDate>' + str(episode['published_date']) + '</pubDate>' + '\n    <itunes:image href="' + request.scheme + '://' + ip + ':' + port + media.episode_image.url + '"/>' + '\n    <title>' + episode['name'] + '</title>' + '\n    <enclosure url="' + request.scheme + '://' + ip + ':' + port + media.episode_mp3.url +  '"/>' + '\n  </item>'
+        episode_details = '  <item>' +'\n    <pubDate>' + str(episode['published_date']) + '</pubDate>' + '\n    <itunes:image href="' + request.scheme + '://' + host_ip + media.episode_image.url + '"/>' + '\n    <title>' + episode['name'] + '</title>' + '\n    <enclosure url="' + request.scheme + '://' + host_ip + media.episode_mp3.url +  '"/>' + '\n  </item>'
         episodes.append(episode_details)    
     combined = "\n"
     combined = combined.join(episodes)
-    return HttpResponse('<rss version="2.0">' '\n <channel>' + '\n   <title>' + podcast_name + '</title>' + ' \n   <itunes:image href="' + request.scheme + '://' + ip + ':' + port + podcast_image_url + '"/> \n' +  combined + '\n </channel>' + '\n</rss>')
+    return HttpResponse('<rss version="2.0">' '\n <channel>' + '\n   <title>' + podcast_name + '</title>' + ' \n   <itunes:image href="' + request.scheme + '://' + host_ip + podcast_image_url + '"/> \n' +  combined + '\n </channel>' + '\n</rss>')
 
