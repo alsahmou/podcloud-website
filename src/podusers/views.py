@@ -8,6 +8,7 @@ from ipware import get_client_ip
 
 # Create your views here.
 def home_view(request, *args, **kwargs):
+    print(request.get_host(), 'host IP')
     ip, is_routable = get_client_ip(request)
     print (request.META['SERVER_PORT'], 'port number')
     print(request.scheme, 'request scheme')
