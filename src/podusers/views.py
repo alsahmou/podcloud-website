@@ -138,9 +138,11 @@ def create_podcast_view (request):
 def podcast_view(request, id):
     obj = Podcast.objects.get(id=id)
     queryset = Episode.objects.filter(podcast_id = id)
+    host_ip = request.get_host()
     context = {
         'object': obj, 
-        'object_list': queryset
+        'object_list': queryset,
+        'ip': host_ip
     }
     return render(request, 'podcast.html', context)
 

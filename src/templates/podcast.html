@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<p>127.0.0.1:8000{% url 'example' %}?id={{object.id}} </p>
+<p>{{ip}}{% url 'example' %}?id={{object.id}}</p>
 
 <p>name {{ object.name }}</p>
 <p>description {{ object.description }}</p>
