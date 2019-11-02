@@ -83,8 +83,8 @@ DATABASES = {
         'NAME': 'podusers', 
         'USER': 'cfe',
         'PASSWORD': 'Ali6101992@',
-        'HOST': '104.236.133.238',
-        'PORT': '8000',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
