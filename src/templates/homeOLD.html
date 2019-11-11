@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+{% load static from staticfiles %}
+
+<link rel="stylesheet" href="{% static 'styles.css' %}">       
+<p id="about">We offer you safe, unlimited and free storage for your podcasts. With only one click all your content will be uploaded in no time. Our mission is to deliver your podcasts to everyone around the globe.</p>
+<p id="about">Signup or login to get started!</p> 
+{% endblock %}

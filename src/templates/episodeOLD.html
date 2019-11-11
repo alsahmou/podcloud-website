@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<p>name {{ object.name }}</p>
+<p>description {{ object.description }}</p>
+<img src="{{ object.episode_image.url }}"/>
+<p>published_date {{ object.published_date }}</p>
+<p>episode_mp3 {{ object.episode_mp3 }}</p>
+
+
+
+<a class="btn btn-primary"  href="/episode/{{ object.id }}/delete">Delete Episode</a>
+
+
+{% endblock %}
+
+
+
+
+

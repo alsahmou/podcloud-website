@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block wrapper %} 
+<div class="wrap-dashboard100">
+{% endblock %}
+
+{% block logo %}
+{% endblock %}
+
+{% block content %}
+
+
+<div class='row'>
+    <div class='col-4'>
+            <div class='circle-image-cropper'>
+                    <img class='profile-image' src="{{ poduser.profile_picture.url }}" alt='Poduser image'>
+                </div>
+    </div>
+    <div class='col-8 object-info'>
+        <div class='row'>
+                {{ poduser.name }}
+            </div>
+        <div class='row'>
+            <div>
+                {{ poduser.city }}, {{ poduser.country }}
+            </div>
+        </div>
+        <div class='row'>
+            <div class="wrap-description txt-dashboard-description">
+                {{ poduser.bio }} I want to be really good at coding, in order to do that I need to make sure I invest my time properly, that's why I time box everything I do and use forest app that I just downloaded yesterday.
+            </div>        
+        </div>
+       </div> 
+</div>
+<div class='row'>
+    <div class='wrap-input100' id='my-podcasts'>
+        My Podcasts
+    </div>
+</div>
+{% for instance in object_list %}
+<div class='row'>
+    <div class='col-4'>
+        <div class='hovereffect'>
+            <a href='/podcast/{{ instance.id }}'>
+                <div class='square-image-cropper'>
+                    <img class='square-image' src="{{ instance.podcast_image.url }}" alt=''>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class='col-8 podcast-info'>   
+        <div class='row'>
+                {{ instance.name }}
+            </div>
+        <div class='row txt1'>
+            By {{ instance.author }}
+            </div>
+        <div class='row txt1'>
+            {{ instance.published_date}}
+        </div>
+        <div class='row'>
+            <div class="wrap-description txt-dashboard-description">
+                {{ instance.description }}  I want to be really good at coding, in order to do that I need to make sure I invest my time properly, that's why I time box everything I do and use forest app that I just downloaded yesterday.
+            </div>
+        </div>
+    </div>
+    <a class='txt1' href="/podcast/{{ instance.id }}/delete">
+        <div class='wrap-input100' id='my-podcasts-each'>Delete Podcast?
+        </a>
+    </div>
+
+    
+
+</div>
+
+{% endfor %}
+<!--<label class="login100-form-btn file-input">
+    <a href="/create_podcast">Create Podcast</a>
+</label>
+</div>-->
+
+<div class="container-login100-form-btn p-t-20">
+        <a href="/create_podcast">
+        <button class="login100-form-btn" type='submit' value='Login'>
+                Create Podcast
+        </button></a>
+    </div>
+
+<div class="text-center p-t-20">
+        <a class="txt1" href="/login">
+            Want to logout?
+        </a>
+    </div>
+
+<!--{% for instance in object_list %}
+    {{ instance.name }}
+    {{ instance.description }}
+    {{ instance.author }}
+    {{ instance.published_date}}
+        <div class='hovereffect'>
+                <a href='/podcast/{{ instance.id }}'>
+
+            <div class='podcast-picture-cropper'>
+                    <img class='podcast-picture' src="{{ instance.podcast_image.url }}" alt=''>
+                </div>
+    </a>
+</div>
+
+
+
+{% endfor %}
+-->
+
+<!--
+{{ poduser.name }}
+<div>{{ poduser.city }}, {{ poduser.country }}</div>
+<img src="{{ poduser.profile_picture.url }}"/>
+
+<div class='image-cropper'>
+    <img class='profile-picture' src="{{ poduser.profile_picture.url }}" alt=''>
+</div>
+   
+
+
+<div class="wrap-bio txt-dashboard-bio">
+    {{ poduser.bio }} I want to be really good at coding, in order to do that I need to make sure I invest my time properly, that's why I time box everything I do and use forest app that I just downloaded yesterday.
+</div>
+
+
+
+<form method='POST' enctype='multipart/form-data'> {% csrf_token %}
+<a class="btn btn-primary" href="/login">Logout</a>
+<a class="btn btn-primary" href="/create_podcast">Create Podcast</a>
+
+</form>
+{% for instance in object_list %}
+    <a class="btn btn-primary" href="/podcast/{{ instance.id }}">{{ instance.name }}</a>
+{% endfor %}
+
+-->
+{% endblock %}
+
+

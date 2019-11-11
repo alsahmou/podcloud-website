@@ -1,27 +1,45 @@
 {% load static from staticfiles %}
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>PodCloud</title>
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    	<title>PodCloud</title>
+    	<meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}">
+    	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    	<link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+    	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+    	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+    	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+    	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+    	<link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+    	<link rel="stylesheet" href="{% static 'util.css' %}">       
+        <link rel="stylesheet" href="{% static 'main.css' %}">
+        
 
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800">
-        <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!-- TO IMPORT BS FROM INTERNET <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
-        <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
-        <link rel="stylesheet" href="{% static 'styles.css' %}">       
     </head>
     <body>
-        <nav class="nav justify-content-end">
-            <p class="mr-auto" id="title">PodCloud</p>
-            <a class="nav-link" href="#">About</a>
-            <a class="nav-link" href="#">Login</a>
-            <a class="nav-link" href="#">Signup</a>
-        </nav>
-        {% block content %}
-        replace me 
-        {% endblock %}
+
+        <div class="limiter">
+            <div class="container-login100">
+                {% block wrapper %}
+                <div class="wrap-login100">
+                {% endblock %}
+                {% block logo %}   
+                <span class="login100-form-logo">
+                        <i class="zmdi zmdi-mic"></i>
+                    </span>
+                    {% endblock %}
+
+                    {% block content %}
+                    REPLACE ME                     
+                    {% endblock %}
+    
+                </div>
+            </div>
+        </div>
+        
     </body>
 </html>

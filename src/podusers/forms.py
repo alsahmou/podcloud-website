@@ -3,6 +3,55 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
 
 from .models import Poduser, Podcast, Episode
 
+from django.forms import Field
+from django.utils.translation import ugettext_lazy
+
+
+
+#class PoduserForm(forms.ModelForm):
+#    class Meta: 
+#        model = Poduser
+#        fields = [
+#            'name',
+#            'phone_number',
+#            'email',
+#            'city',
+#            'country',
+#            'bio',
+#            'profile_picture',
+#            'password',
+#            'password_confirmation', 
+#            'username',
+#            
+#        ]
+#        
+#        widgets = {
+#            'bio': forms.TextInput(),
+#            'password': forms.PasswordInput(),
+#            'password_confirmation': forms.PasswordInput(),
+#            'name': forms.TextInput(),
+#            'username': forms.TextInput(),
+#            'email': forms.TextInput(),
+#            'phone_number': forms.TextInput(),
+#            'city': forms.TextInput(),
+#            'country': forms.TextInput(),
+#
+#
+#        }
+#    
+#    def clean_password(self):
+#        cleaned_data = super(PoduserForm, self).clean()
+#        print(cleaned_data, 'cleaned data')
+#        password = cleaned_data.get("password")
+#        password_confirmation = cleaned_data.get("password_confirmation")
+#        print(password, 'password')
+#        print(password_confirmation, 'confirmation')
+#
+#        if password != password_confirmation:
+#            raise forms.ValidationError(
+#                "Passwords do not match"
+#            )
+
 class PoduserForm(forms.ModelForm):
     class Meta: 
         model = Poduser
@@ -36,12 +85,13 @@ class PoduserForm(forms.ModelForm):
             )
 
 class LoginForm(forms.Form):
-    username = forms.CharField(widget=forms.TextInput)
-    password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
     fields = [
         'username',
         'password'
     ]
+ 
 
 class PodcastForm(forms.ModelForm):
     class Meta: 

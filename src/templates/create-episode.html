@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<form method='POST' enctype='multipart/form-data'> {% csrf_token %}
+
+    
+    
+    <span class="login100-form-title p-b-34 p-t-27">
+        Create Episode 
+    </span>
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="text" name='name' placeholder="Name">
+        <span class="focus-input100" data-placeholder="&#xf2ce;"></span>
+    </div>
+    
+    {% if userForm.name.errors %}
+    <div class="form-error">
+        {{ userForm.name.errors }}
+    </div>
+    {% endif %}
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="text" name='published_date' placeholder="Published Date" onfocus="(this.type='date')" onblur="(this.type='text')">
+        <span class="focus-input100" data-placeholder="&#xf278;"></span>
+    </div>
+
+    {% if userForm.published_date.errors %}
+    <div class="form-error">
+        {{ userForm.published_date.errors }}
+    </div>
+    {% endif %}
+
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="text" name='description' placeholder="Description">
+        <span class="focus-input100" data-placeholder="&#xf10c;"></span>
+    </div>
+
+    {% if userForm.description.errors %}
+    <div class="form-error">
+        {{ userForm.description.errors }}
+    </div>
+    {% endif %}
+
+    <div class='row'>
+        <div class='col'>
+           
+            <div class="container-login100-form-btn p-t-20">
+
+                    <label class="login100-form-btn file-input">
+                            Upload Image 
+                            <input styles='cursor: pointer;' type="file" name='episode_image' hidden>
+                        </label>
+                    </div>
+                
+                    {% if userForm.episode_image.errors %}
+                    <div class="form-error">
+                        {{ userForm.episode_image.errors }}
+                    </div>
+                    {% endif %}
+        
+        </div>
+        <div class='col'>
+                <div class="container-login100-form-btn p-t-20">
+
+                        <label class="login100-form-btn file-input">
+                                Upload Audio  
+                                <input styles='cursor: pointer;' type="file" name='episode_mp3' hidden>
+                            </label>
+                        </div>
+                        
+                        {% if userForm.episode_mp3.errors %}
+                        <div class="form-error">
+                            {{ userForm.episode_mp3.errors }}
+                        </div>
+                        {% endif %}
+        </div>
+
+    </div>
+
+   
+   
+
+    <div class="container-login100-form-btn p-t-20">
+        <button class="login100-form-btn" type='submit' value='Login'>
+            Submit
+        </button>
+    </div>
+
+    <div class="text-center p-t-20">
+        <a class="txt1" href="/login">
+            Want to logout?
+        </a>
+    </div>
+
+</form>	
+
+{% endblock %}

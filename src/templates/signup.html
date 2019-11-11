@@ -3,106 +3,135 @@
 
 {% block content %}
 <form method='POST' enctype='multipart/form-data'> {% csrf_token %}
-    <div class="row">
-        <div class="col">
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-11">
-                                <div class="fieldWrapper">
-                                    <label>Name<span style="color: red;"> *</span></label>
-                                      <div>{{ form.name }}</div> {{ form.name.errors }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-11">
-                                <div class="fieldWrapper">
-                                    <label>Phone Number<span style="color: red;"> *</span></label>
-                                        <div>{{ form.phone_number }}</div> {{ form.phone_number.errors }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-row">
-                    <div class="col-11">
-                        <div class="fieldWrapper">
-                            <label>Email<span style="color: red;"> *</span></label>
-                                <div>{{ form.email }}</div> {{ form.email.errors }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-11">
-                                <div class="fieldWrapper">
-                                    <label>City:</label>
-                                        <div>{{ form.city }}</div> {{ form.city.errors }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <div class="form-row">
-                            <div class="col-11">
-                                <div class="fieldWrapper">
-                                    <label>Country:</label>
-                                        <div>{{ form.country }}</div> {{ form.country.errors }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p style="color: red; position: relative; bottom: 20px;">* Inicates required field</p>
-                </div>
-                <div class="col">
-                    <input type='submit' value='Submit'/>
-                </div>
-            </div>     
-        </div>
-        <div class="col">
-            <div class="form-group">
-                <div class="fieldWrapper">
-                    <label>Bio:</label>
-                        <div>{{ form.bio }}</div> {{ form.bio.errors }}
-                </div>
-            </div>
-            <div class="fieldWrapper">
-                <label for="id_profile_picture">Profile Picture:</label> {{ form.profile_picture.errors }}
-                <div class="avatar-preview">
-                    <div id="imagePreview"> 
-                    </div>
-                </div>
-                    {{ form.profile_picture }}
-            </div>
-        </div>
-        <div>
-            {{ form.password }} {{ form.password.errors }}
-        </div>
-        <div>
-            {{ form.password_confirmation }} {{ form.password_confirmation.errors }}
-        </div>
-        <div>
-           Username {{ form.username }} {{ form.username.errors }}
-        </div>
-</form>
-<div>
 
-</div>
+    
+    
+    <span class="login100-form-title p-b-34 p-t-27">
+        Signup 
+    </span>
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="text" name='name' placeholder="Name">
+        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+    </div>
+    
+    {% if form.name.errors %}
+    <div class="form-error">
+        {{ form.name.errors }}
+    </div>
+    {% endif %}
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="text" name='username' placeholder="Username">
+        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+    </div>
+
+    {% if form.username.errors %}
+    <div class="form-error">
+        {{ form.username.errors }}
+    </div>
+    {% endif %}
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="text" name='email' placeholder="Email">
+        <span class="focus-input100" data-placeholder="&#xf200;"></span>
+    </div>
+
+    {% if form.email.errors %}
+    <div class="form-error">
+        {{ form.email.errors }}
+    </div>
+    {% endif %}
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="text" name='phone_number' placeholder="Phone Number">
+        <span class="focus-input100" data-placeholder="&#xf202;"></span>
+    </div>
+
+    {% if form.phone_number.errors %}
+    <div class="form-error">
+        {{ form.phone_number.errors }}
+    </div>
+    {% endif %}
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="password" name='password' placeholder="Password">
+        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+    </div>
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="password" name='password_confirmation' placeholder="Password Confirmation">
+        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+    </div>
+    
+     {% if form.password.errors %}
+    <div class="form-error">
+        {{ form.password.errors }}
+    </div>
+    {% endif %}
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="text" name='city' placeholder="City">
+        <span class="focus-input100" data-placeholder="&#xf1ab;"></span>
+    </div>
+
+    {% if form.city.errors %}
+    <div class="form-error">
+        {{ form.city.errors }}
+    </div>
+    {% endif %}
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="text" name='country' placeholder="Country">
+        <span class="focus-input100" data-placeholder="&#xf1ab;"></span>
+    </div>
+
+    {% if form.country.errors %}
+    <div class="form-error">
+        {{ form.country.errors }}
+    </div>
+    {% endif %}
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="text" name='bio' placeholder="Bio">
+        <span class="focus-input100" data-placeholder="&#xf10c;"></span>
+    </div>
+
+    {% if form.bio.errors %}
+    <div class="form-error">
+        {{ form.bio.errors }}
+    </div>
+    {% endif %}
+
+
+    <div class="container-login100-form-btn p-t-20">
+
+    <label class="login100-form-btn file-input">
+            Upload a Profile Picture 
+            <input styles='cursor: pointer;' type="file" name='profile_picture' hidden>
+        </label>
+    </div>
+
+    {% if form.profile_picture.errors %}
+    <div class="form-error">
+        {{ form.profile_picture.errors }}
+    </div>
+    {% endif %}
+
+   
+
+    <div class="container-login100-form-btn p-t-20">
+        <button class="login100-form-btn" type='submit' value='Login'>
+            Submit
+        </button>
+    </div>
+
+    <div class="text-center p-t-20">
+        <a class="txt1" href="/login">
+            Already have an account?
+        </a>
+    </div>
+
+</form>	
+
 {% endblock %}

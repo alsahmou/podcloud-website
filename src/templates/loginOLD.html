@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<form method='POST' enctype='multipart/form-data'> {% csrf_token %}
+    <div>{{ form.username }}</div>
+    <div>{{ form.password }}</div>
+    <div class="col">
+        <input type='submit' value='Login'/>
+    </div>
+</form>
+
+{% endblock %}

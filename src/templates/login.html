@@ -2,13 +2,43 @@
 {% load static %}
 
 {% block content %}
-
 <form method='POST' enctype='multipart/form-data'> {% csrf_token %}
-    <div>Username {{ form.username }}</div>
-    <div> Password {{ form.password }}</div>
-    <div class="col">
-        <input type='submit' value='Submit'/>
+    
+    <span class="login100-form-title p-b-34 p-t-27">
+        Log in
+    </span>
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="text" name='username' placeholder="Username">
+        <span class="focus-input100" data-placeholder="&#xf207;"></span>
     </div>
-</form>
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="password" name='password' placeholder="Password">
+        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+    </div>
+
+
+    <div class="text-left">
+            <a class="txt1" href="#">
+                Forgot Password?
+            </a>
+        </div>
+
+    <div class="container-login100-form-btn p-t-20">
+        <button class="login100-form-btn" type='submit' value='Login'>
+            Login
+        </button>
+    </div>
+
+    <div class="text-center p-t-20">
+        <a class="txt1" href="/signup">
+            Don't have an account?
+        </a>
+    </div>
+    
+
+</form>	
+
 
 {% endblock %}

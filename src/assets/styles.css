@@ -1,3 +1,4 @@
+/* Base styles */ 
 body {
     background-image: url("Mic.jpg");
     background-size: cover;
@@ -30,19 +31,87 @@ a {
       text-decoration: underline; }
 
 
+
+/* Home styles */
+
+#about {
+    font-size: 50px;
+    text-align: left;
+    margin: 0 auto;
+    position: relative;
+    top: 100px;
+}
+
+/* Signup styles */
+
+::placeholder {
+    opacity: 1;
+}
+#id_name {
+    width: 300px;
+}
+
+#id_username {
+    width: 300px;
+}
+
+#id_password {
+    width: 300px;
+}
+
+#id_password_confirmation {
+    width: 300px;
+}
+
+#id_email {
+    position: relative;
+    left: 14px;
+    width: 400px;
+}
+
+#id_phone_number {
+    position: relative;
+    left: 14px; 
+    width: 400px;
+}
+
+#id_city {
+    width: 300px;
+}
+#id_country {
+    width: 300px;
+}
+
+/* Forms styles */ 
+
+form {
+    font-size: 25px;
+    position: relative;
+    top: 100px;
+}
+
 input {
     border-color: #d95700;
     background: transparent;
     color: #d95700;
     border-radius: 10px;
+    margin: 20px;
+}
+
+.formError {
+    color: red;
+    font-size: 18px;
+    margin: -22px;
 }
 
 
-form {
-    font-size: 30px;
-    position: relative;
-    top: 100px;
-}
+
+
+
+
+
+
+
 
 .bio-class {
     height: 200px;
