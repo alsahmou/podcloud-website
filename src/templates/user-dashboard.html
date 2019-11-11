@@ -19,16 +19,16 @@
     </div>
     <div class='col-8 object-info'>
         <div class='row'>
-                {{ poduser.name }}
+                {{ poduser.name|title }}
             </div>
         <div class='row'>
             <div>
-                {{ poduser.city }}, {{ poduser.country }}
+                {{ poduser.city|title }}, {{ poduser.country|title }}
             </div>
         </div>
         <div class='row'>
             <div class="wrap-description txt-dashboard-description">
-                {{ poduser.bio }} I want to be really good at coding, in order to do that I need to make sure I invest my time properly, that's why I time box everything I do and use forest app that I just downloaded yesterday.
+                {{ poduser.bio|title }} I want to be really good at coding, in order to do that I need to make sure I invest my time properly, that's why I time box everything I do and use forest app that I just downloaded yesterday.
             </div>        
         </div>
        </div> 
@@ -51,17 +51,17 @@
     </div>
     <div class='col-8 podcast-info'>   
         <div class='row'>
-                {{ instance.name }}
+                {{ instance.name|title }}
             </div>
         <div class='row txt1'>
-            By {{ instance.author }}
+            By {{ instance.author|title }}
             </div>
         <div class='row txt1'>
             {{ instance.published_date}}
         </div>
         <div class='row'>
             <div class="wrap-description txt-dashboard-description">
-                {{ instance.description }}  I want to be really good at coding, in order to do that I need to make sure I invest my time properly, that's why I time box everything I do and use forest app that I just downloaded yesterday.
+                {{ instance.description|title }}  I want to be really good at coding, in order to do that I need to make sure I invest my time properly, that's why I time box everything I do and use forest app that I just downloaded yesterday.
             </div>
         </div>
     </div>

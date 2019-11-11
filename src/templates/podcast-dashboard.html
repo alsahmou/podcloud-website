@@ -17,16 +17,16 @@
 <div class='row p-t-30'>
     <div class='col-4'>
             <div class='square-image-cropper'>
-                    <img class='profile-image' src="{{ object.podcast_image.url }}" alt='object image'>
+                    <img class='profile-image' src="{{ object.podcast_image.url }}" alt='Podcast Image'>
                 </div>
     </div>
     <div class='col-8 podcast-info'>
         <div class='row'>
-                {{ object.name }}
+                {{ object.name|title }}
             </div>
         <div class='row txt1'>
             <div>
-              By {{ object.author }}
+              By {{ object.author|title }}
             </div>
         </div>
         <div class='row txt1'>
@@ -36,7 +36,7 @@
         </div>
         <div class='row'>
             <div class="wrap-description txt-dashboard-description">
-                {{ object.description }} I want to be really good at coding, in order to do that I need to make sure I invest my time properly, that's why I time box everything I do and use forest app that I just downloaded yesterday.
+                {{ object.description|title }} I want to be really good at coding, in order to do that I need to make sure I invest my time properly, that's why I time box everything I do and use forest app that I just downloaded yesterday.
             </div>        
         </div>
        </div> 
@@ -53,20 +53,20 @@
     <div class='col-4'>
         <div class='hovereffect'>
                 <div class='square-image-cropper'>
-                    <img class='square-image' src="{{ instance.episode_image.url }}" alt=''>
+                    <img class='square-image' src="{{ instance.episode_image.url }}" alt='Episode Image'>
                 </div>
         </div>
     </div>
     <div class='col-8 podcast-info'>   
         <div class='row'>
-                {{ instance.name }}
+                {{ instance.name|title }}
             </div>
         <div class='row txt1'>
             {{ instance.published_date}}
         </div>
         <div class='row'>
             <div class="wrap-description txt-dashboard-description">
-                {{ instance.description }}  I want to be really good at coding, in order to do that I need to make sure I invest my time properly, that's why I time box everything I do and use forest app that I just downloaded yesterday.
+                {{ instance.description|title }}  I want to be really good at coding, in order to do that I need to make sure I invest my time properly, that's why I time box everything I do and use forest app that I just downloaded yesterday.
             </div>
         </div>
     </div>

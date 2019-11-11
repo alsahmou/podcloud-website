@@ -12,14 +12,14 @@ class Poduser(models.Model):
     city = models.CharField(max_length=20, blank=True, null=True)
     country = models.CharField(max_length=20, blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
-    profile_picture = models.ImageField(blank=True, null=True)
+    profile_picture = models.ImageField(blank=True, null=True, default='Mic.jpg')
     password = models.CharField(max_length=20, null=True)
     password_confirmation = models.CharField(max_length=20, null=True)
     
 
 class Podcast(models.Model):
     username = models.CharField(max_length=20, null=True)
-    podcast_image = models.ImageField(blank=True, null=True)
+    podcast_image = models.ImageField(blank=True, null=True, default='url("Mic.jpg")')
     name = models.CharField(max_length=20, null=True)
     description = models.TextField(blank=True, null=True)
     author = models.CharField(max_length=20, null=True, blank=True)
@@ -31,7 +31,7 @@ class Episode(models.Model):
     description = models.TextField(blank=True, null=True)
     published_date = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
     episode_mp3 = models.FileField(max_length=100, null=True, blank=True)
-    episode_image = models.ImageField(blank=True, null=True)
+    episode_image = models.ImageField(blank=True, null=True, default='Mic.jpg')
 
 
 
