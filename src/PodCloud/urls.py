@@ -29,6 +29,7 @@ from podusers.views import (
     delete_episode_view,
     xml_view,
     example,
+    forgot_password_view,
     
 ) 
 from podusers.models import Poduser, Podcast
@@ -49,7 +50,8 @@ urlpatterns = [
     path('episode/<int:id>/delete/', delete_episode_view, name='episode_delete'),
     path('episode/xml', xml_view, name='xml_file' ),
     path('hi/', example, name='example'),
-    path('', home_view, name='home')
+    path('', home_view, name='home'),
+    path('forgot-password', forgot_password_view, name='forgot_password')
 
     #path('episode/<int:id>.mp3')
 ]

@@ -3,7 +3,9 @@ from django.shortcuts import render, redirect, get_object_or_404, render_to_resp
 from .models import Poduser, Episode, Podcast
 from .forms import PoduserForm, LoginForm, PodcastForm, EpisodeForm, UserPodcastForm, UserEpisodeForm
 from django.core import serializers
-from ipware import get_client_ip   
+from ipware import get_client_ip 
+import hashlib  
+ 
 
 
 # Create your views here.
@@ -28,6 +30,34 @@ def home_view(request, *args, **kwargs):
     print('page rendered')
     return render(request, "home.html", {})
 
+def forgot_password_view(request, *args, **kwargs):
+    return render(request, 'forgot-password.html', {})
+
+#def signup_view(request):
+#    print('sign up page rendered')
+#    username = None
+#    if request.method == 'GET':
+#        form = PoduserForm()
+#        print('request method GET')
+#    else:
+#        print('request method POST')
+#        form = PoduserForm(request.POST or None, request.FILES)
+#        if request.session.has_key('username'):
+#            request.session.flush()
+#        print(form.errors)
+#        if form.is_valid():
+#            username = form.cleaned_data['username']
+#            request.session['username'] = username
+#            form.save()
+#            form = PoduserForm()
+#            return redirect('/welcome/')
+#
+#    context = {
+#        'form': form
+#    }
+#    return render(request, 'signup.html', context)
+
+
 def signup_view(request):
     print('sign up page rendered')
     username = None
@@ -41,16 +71,22 @@ def signup_view(request):
             request.session.flush()
         print(form.errors)
         if form.is_valid():
+            print('form is valid')
             username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            password_confirmation = form.cleaned_data['password_confirmation']
             request.session['username'] = username
-            form.save()
+            encrypted_form = form.save(commit=False)
+            encrypted_form.password = (hashlib.md5(password.encode())).hexdigest()
+            encrypted_form.password_confirmation = (hashlib.md5(password_confirmation.encode())).hexdigest()
+            encrypted_form.save()
             form = PoduserForm()
             return redirect('/welcome/')
 
     context = {
         'form': form
     }
-    return render(request, 'signup.html', context)
+    return render(request, 'signup.html', context) 
 
 def login_view(request, *args, **kwargs):
     print('page rendered')

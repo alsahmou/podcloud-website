@@ -5,7 +5,8 @@ from .models import Poduser, Podcast, Episode
 
 from django.forms import Field
 from django.utils.translation import ugettext_lazy
-
+from passlib.hash import pbkdf2_sha256
+import hashlib
 
 
 #class PoduserForm(forms.ModelForm):
@@ -73,16 +74,35 @@ class PoduserForm(forms.ModelForm):
             'password': forms.PasswordInput(),
             'password_confirmation': forms.PasswordInput()
         }
-    
+
+    #def encrypt(self):
+    #    print('encrypting function')
+    #    cleaned_data = super(PoduserForm, self).clean()
+    #    password = cleaned_data.get("password")
+    #    password_confirmation = cleaned_data.get("password_confirmation")
+    #    password = (hashlib.md5(password.encode())).hexdigest() 
+    #    password_confirmation = (hashlib.md5(password_confirmation.encode())).hexdigest()
+    #    print('encrypted password', password)
+    #    return password
+
     def clean(self):
+        print('encrypting function')
         cleaned_data = super(PoduserForm, self).clean()
         password = cleaned_data.get("password")
         password_confirmation = cleaned_data.get("password_confirmation")
+        password = (hashlib.md5(password.encode())).hexdigest()
+        print('encrypted password', password)
+        password_confirmation = (hashlib.md5(password_confirmation.encode())).hexdigest()
+        print('encrypted confirmation', password_confirmation)
 
         if password != password_confirmation:
             raise forms.ValidationError(
                 "password and password_confirmation does not match"
             )
+
+        
+    
+        
 
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
