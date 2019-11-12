@@ -1,58 +1,14 @@
 from django import forms
 from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
-
 from .models import Poduser, Podcast, Episode
-
 from django.forms import Field
 from django.utils.translation import ugettext_lazy
-from passlib.hash import pbkdf2_sha256
 import hashlib
 
+#UserForm is what is visibile to the user
+#Form is what is sent to the DB
 
-#class PoduserForm(forms.ModelForm):
-#    class Meta: 
-#        model = Poduser
-#        fields = [
-#            'name',
-#            'phone_number',
-#            'email',
-#            'city',
-#            'country',
-#            'bio',
-#            'profile_picture',
-#            'password',
-#            'password_confirmation', 
-#            'username',
-#            
-#        ]
-#        
-#        widgets = {
-#            'bio': forms.TextInput(),
-#            'password': forms.PasswordInput(),
-#            'password_confirmation': forms.PasswordInput(),
-#            'name': forms.TextInput(),
-#            'username': forms.TextInput(),
-#            'email': forms.TextInput(),
-#            'phone_number': forms.TextInput(),
-#            'city': forms.TextInput(),
-#            'country': forms.TextInput(),
-#
-#
-#        }
-#    
-#    def clean_password(self):
-#        cleaned_data = super(PoduserForm, self).clean()
-#        print(cleaned_data, 'cleaned data')
-#        password = cleaned_data.get("password")
-#        password_confirmation = cleaned_data.get("password_confirmation")
-#        print(password, 'password')
-#        print(password_confirmation, 'confirmation')
-#
-#        if password != password_confirmation:
-#            raise forms.ValidationError(
-#                "Passwords do not match"
-#            )
-
+#Poduser model forms
 class PoduserForm(forms.ModelForm):
     class Meta: 
         model = Poduser
@@ -75,34 +31,17 @@ class PoduserForm(forms.ModelForm):
             'password_confirmation': forms.PasswordInput()
         }
 
-    #def encrypt(self):
-    #    print('encrypting function')
-    #    cleaned_data = super(PoduserForm, self).clean()
-    #    password = cleaned_data.get("password")
-    #    password_confirmation = cleaned_data.get("password_confirmation")
-    #    password = (hashlib.md5(password.encode())).hexdigest() 
-    #    password_confirmation = (hashlib.md5(password_confirmation.encode())).hexdigest()
-    #    print('encrypted password', password)
-    #    return password
 
     def clean(self):
-        print('encrypting function')
         cleaned_data = super(PoduserForm, self).clean()
         password = cleaned_data.get("password")
         password_confirmation = cleaned_data.get("password_confirmation")
-        password = (hashlib.md5(password.encode())).hexdigest()
-        print('encrypted password', password)
-        password_confirmation = (hashlib.md5(password_confirmation.encode())).hexdigest()
-        print('encrypted confirmation', password_confirmation)
 
         if password != password_confirmation:
             raise forms.ValidationError(
                 "password and password_confirmation does not match"
             )
-
-        
-    
-        
+      
 
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
@@ -112,7 +51,7 @@ class LoginForm(forms.Form):
         'password'
     ]
  
-
+#Podcast model forms
 class PodcastForm(forms.ModelForm):
     class Meta: 
         model = Podcast
@@ -140,6 +79,7 @@ class UserPodcastForm(forms.Form):
         'podcast_image',
     ]
 
+#Episode model forms
 class EpisodeForm(forms.ModelForm):
     class Meta:
         model = Episode

@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from podusers.models import Poduser, Podcast
+from django.conf.urls.static import static
+from django.conf import settings
 from podusers.views import (
     episode_view,
     home_view, 
@@ -29,12 +32,8 @@ from podusers.views import (
     delete_episode_view,
     xml_view,
     example,
-    forgot_password_view,
-    
-) 
-from podusers.models import Poduser, Podcast
-from django.conf.urls.static import static
-from django.conf import settings    
+    forgot_password_view, 
+)     
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -52,8 +51,6 @@ urlpatterns = [
     path('hi/', example, name='example'),
     path('', home_view, name='home'),
     path('forgot-password', forgot_password_view, name='forgot_password')
-
-    #path('episode/<int:id>.mp3')
 ]
 
 urlpatterns += staticfiles_urlpatterns()
