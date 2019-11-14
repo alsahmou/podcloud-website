@@ -4,8 +4,6 @@
 {% block content %}
 <form method='POST' enctype='multipart/form-data'> {% csrf_token %}
 
-    
-    
     <span class="login100-form-title p-b-34 p-t-27">
         Signup 
     </span>
@@ -106,7 +104,7 @@
 
     <div class="container-login100-form-btn p-t-20">
 
-    <label class="login100-form-btn file-input">
+        <label class="login100-form-btn file-input">
             Upload a Profile Picture 
             <input styles='cursor: pointer;' type="file" name='profile_picture' hidden>
         </label>

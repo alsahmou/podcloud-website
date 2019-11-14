@@ -20,37 +20,33 @@ from podusers.models import Poduser, Podcast
 from django.conf.urls.static import static
 from django.conf import settings
 from podusers.views import (
-    episode_view,
     home_view, 
     signup_view,
-    welcome_view,
-    login_view, 
+    login_view,
+    forgot_password_view,
+    user_view, 
     create_podcast_view, 
-    create_episode_view, 
     podcast_view, 
+    create_episode_view, 
     delete_podcast_view, 
     delete_episode_view,
-    xml_view,
-    example,
-    forgot_password_view, 
+    xml_file 
 )     
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', home_view, name='home'),
-    path('signup/', signup_view, name='signup'),
-    path('welcome/', welcome_view, name='welcome'),
-    path('login/', login_view, name='login'),
-    path('create_podcast/', create_podcast_view, name='create_podcast'),
-    path('podcast/<int:id>/create_episode/', create_episode_view, name='create_episode'),
-    path('podcast/<int:id>/', podcast_view, name='podcast'),
-    path('podcast/<int:id>/delete/', delete_podcast_view, name='podcast_delete'),
-    path('episode/<int:id>/', episode_view, name='episode'),
-    path('episode/<int:id>/delete/', delete_episode_view, name='episode_delete'),
-    path('episode/xml', xml_view, name='xml_file' ),
-    path('hi/', example, name='example'),
     path('', home_view, name='home'),
-    path('forgot-password', forgot_password_view, name='forgot_password')
+    path('signup/', signup_view, name='signup'),
+    path('login/', login_view, name='login'),
+    path('forgot-password', forgot_password_view, name='forgot_password'),
+    path('user-dashboard/', user_view, name='user-dashboard'),
+    path('user-dashboard/create-podcast', create_podcast_view, name='create-podcast'),
+    path('user-dashboard/podcast/<int:id>/', podcast_view, name='podcast'),
+    path('user-dashboard/podcast/<int:id>/create_episode/', create_episode_view, name='create_episode'),
+    path('podcast/<int:id>/delete/', delete_podcast_view, name='podcast_delete'),
+    path('user-dashboard/episode/<int:id>/delete/', delete_episode_view, name='episode_delete'),
+    path('episode/xml', xml_file, name='xml_file' ),
+    path('podcast-xml', xml_file, name='example')
 ]
 
 urlpatterns += staticfiles_urlpatterns()

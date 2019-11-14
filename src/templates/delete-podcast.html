@@ -3,7 +3,7 @@
 
 
 {% block wrapper %} 
-<div class="wrap-dashboard100">
+    <div class="wrap-delete100">
 {% endblock %}
 
 
@@ -16,21 +16,19 @@
     <div class='txt5'>Are you sure that you want to delete "{{ object.name }}" podcast?</div>
   
 <div class='row'>
-        <div class='col'>
-                <div class="container-login100-form-btn p-t-20">
-                        <button class="login100-form-btn" type='submit' value='Login'>
-                            Yes
-                        </button>
-                    </div> 
-        
-        </div>
-        <div class='col'>
-                <div class="container-login100-form-btn p-t-20">
-                        <a class='login100-form-btn' href='../'>Cancel</a>
-                        </button>
-                    </div> 
-        </div>
-
+    <div class='col'>
+        <div class="container-login100-form-btn p-t-20">
+            <button class="login100-form-btn" type='submit' value='Login'>
+                Yes
+            </button>
+        </div>     
+    </div>
+    <div class='col'>
+        <div class="container-login100-form-btn p-t-20">
+            <a class='login100-form-btn' href='/user-dashboard'>Cancel</a>
+            </button>
+        </div> 
+    </div>
 </form>
 
 

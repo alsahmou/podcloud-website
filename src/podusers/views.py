@@ -5,26 +5,8 @@ from .forms import PoduserForm, LoginForm, PodcastForm, EpisodeForm, UserPodcast
 from django.core import serializers
 from ipware import get_client_ip 
 import hashlib  
- 
 
 
-# Create your views here.
-#def home_view(request, *args, **kwargs):
-#    print(request.get_host(), 'host IP')
-#    ip, is_routable = get_client_ip(request)
-#    print (request.META['SERVER_PORT'], 'port number')
-#    print(request.scheme, 'request scheme')
-#    if ip is None:
-#        print('IP is NONE')
-#    else:
-#        print('IP is valid')
-#        if is_routable:
-#            print('IP is public')
-#        else:
-#            print('private IP')
-#            print(ip, 'IP')
-#    return HttpResponse("<h1>Welcome to PodCloud</h1>")
-#    #return render(request, "home.html", {})
 
 def home_view(request, *args, **kwargs):
     print('page rendered')
@@ -33,45 +15,16 @@ def home_view(request, *args, **kwargs):
 def forgot_password_view(request, *args, **kwargs):
     return render(request, 'forgot-password.html', {})
 
-#def signup_view(request):
-#    print('sign up page rendered')
-#    username = None
-#    if request.method == 'GET':
-#        form = PoduserForm()
-#        print('request method GET')
-#    else:
-#        print('request method POST')
-#        form = PoduserForm(request.POST or None, request.FILES)
-#        if request.session.has_key('username'):
-#            request.session.flush()
-#        print(form.errors)
-#        if form.is_valid():
-#            username = form.cleaned_data['username']
-#            request.session['username'] = username
-#            form.save()
-#            form = PoduserForm()
-#            return redirect('/welcome/')
-#
-#    context = {
-#        'form': form
-#    }
-#    return render(request, 'signup.html', context)
-
 
 def signup_view(request):
-    print('sign up page rendered')
     username = None
     if request.method == 'GET':
         form = PoduserForm()
-        print('request method GET')
     else:
-        print('request method POST')
         form = PoduserForm(request.POST or None, request.FILES)
         if request.session.has_key('username'):
             request.session.flush()
-        print(form.errors)
         if form.is_valid():
-            print('form is valid')
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             password_confirmation = form.cleaned_data['password_confirmation']
@@ -81,7 +34,7 @@ def signup_view(request):
             encrypted_form.password_confirmation = (hashlib.md5(password_confirmation.encode())).hexdigest()
             encrypted_form.save()
             form = PoduserForm()
-            return redirect('/welcome/')
+            return redirect('/user-dashboard/')
 
     context = {
         'form': form
@@ -89,21 +42,19 @@ def signup_view(request):
     return render(request, 'signup.html', context) 
 
 def login_view(request, *args, **kwargs):
-    print('page rendered')
     username = None 
     form = LoginForm(request.POST or None, request.FILES)
     if request.session.has_key('username'):
         request.session.flush()
     if form.is_valid():
         username = form.cleaned_data['username']
-        if Poduser.objects.filter(username=request.POST['username'], password=request.POST['password']).exists():
+        password = form.cleaned_data['password']
+        encrypted_password = (hashlib.md5(password.encode())).hexdigest()
+        if Poduser.objects.filter(username=request.POST['username'], password=encrypted_password).exists():
             request.session['username'] = username
-            print('correct username and password')
-            print(request.session.session_key, 'key at username and pass')
-            return redirect('/welcome/')
+            return redirect('/user-dashboard/')
         else:
             username = None 
-            print('incorrect username and password')
     else: 
         form = LoginForm()
     context = {
@@ -112,20 +63,46 @@ def login_view(request, *args, **kwargs):
     }
     return render(request, 'login.html', context)
 
-def welcome_view(request, *args, **kwargs):
-    print(request.session.session_key, 'key at welcome')
+def user_view(request, *args, **kwargs):
     if 'username' in request.session:
         username = request.session['username']
-        print(username)
     queryset = Podcast.objects.filter(username = username)
     queryset_poduser = Poduser.objects.get(username = username)
-    print(queryset_poduser, 'poduser object')
     context = {
         'username': username,
         'object_list': queryset,
         'poduser': queryset_poduser
     }
     return render(request, "user-dashboard.html", context)
+
+def create_podcast_view (request):
+    if request.method == 'GET':
+        userForm = UserPodcastForm()
+    else:
+        userForm = UserPodcastForm(request.POST or None, request.FILES)
+        if userForm.is_valid():
+            request.POST = {
+                'username': request.session['username'],
+                'name': userForm.cleaned_data['name'],
+                'author': userForm.cleaned_data['author'],
+                'description': userForm.cleaned_data['description'],
+                'published_date': userForm.cleaned_data['published_date'],
+                'podcast_image': userForm.cleaned_data['podcast_image']
+            }
+            form = PodcastForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('/user-dashboard/')
+            else:
+                print(form.errors)
+        else: 
+            print(userForm.errors)
+
+    context = {
+        'userForm': userForm
+    }
+    return render(request, 'create-podcast.html', context)
+
 
 def create_episode_view(request, id):
     if request.method == 'GET':
@@ -146,12 +123,10 @@ def create_episode_view(request, id):
             form = EpisodeForm(request.POST or None, request.FILES)
             if form.is_valid():
                 form.save()
-                return redirect('/welcome/')
+                return redirect('../')
             else:
-                print(form.errors, 'form errors')
-                print('invalid episode form')
+                print(form.errors)
         else: 
-            print('invalid user epsiode form')
             print(userForm.errors)
 
     context = {
@@ -159,39 +134,6 @@ def create_episode_view(request, id):
     }
     return render(request, 'create-episode.html', context)
 
-def create_podcast_view (request):
-    if request.method == 'GET':
-        userForm = UserPodcastForm()
-        print('request method GET')
-    else:
-        userForm = UserPodcastForm(request.POST or None, request.FILES)
-        if userForm.is_valid():
-            request.POST = {
-                'username': request.session['username'],
-                'name': userForm.cleaned_data['name'],
-                'author': userForm.cleaned_data['author'],
-                'description': userForm.cleaned_data['description'],
-                'published_date': userForm.cleaned_data['published_date'],
-                'podcast_image': userForm.cleaned_data['podcast_image']
-            }
-            form = PodcastForm(request.POST, request.FILES)
-            if form.is_valid():
-                print('vallid form')
-                print(form.errors)
-
-                form.save()
-                return redirect('/welcome/')
-            else:
-                print(form.errors, 'form errors')
-                print('invalid form')
-        else: 
-            print('invalid user form')
-            print(userForm.errors)
-
-    context = {
-        'userForm': userForm
-    }
-    return render(request, 'create-podcast.html', context)
     
 def podcast_view(request, id):
     obj = Podcast.objects.get(id=id)
@@ -204,83 +146,29 @@ def podcast_view(request, id):
     }
     return render(request, 'podcast-dashboard.html', context)
 
-def episode_view(request, id):
-    obj = Episode.objects.get(id=id)
+
+def delete_podcast_view(request, id):
+    obj = get_object_or_404(Podcast, id=id)
+    if request.method == 'POST':
+        obj.delete()
+        return redirect('/user-dashboard/')
     context = {
-        'object': obj
+        'object': obj 
     }
-    return render(request, 'episode-dashboard.html', context)
+    return render(request, 'delete-podcast.html', context)
 
 def delete_episode_view(request, id):
     obj = get_object_or_404(Episode, id=id)
-    print(obj)
     if request.method == 'POST':
         obj.delete()
-        return redirect('/welcome/')
+        return redirect('/user-dashboard/')
     context = {
         'object': obj
     }
     return render(request, 'delete-episode.html', context)
 
 
-def delete_podcast_view(request, id):
-    obj = get_object_or_404(Podcast, id=id)
-    print(obj)
-    if request.method == 'POST':
-        obj.delete()
-        return redirect('/welcome/')
-    context = {
-        'object': obj 
-    }
-    return render(request, 'delete-podcast.html', context)
-
-
-from .models import Poduser, Podcast, Episode
-from django.http import HttpResponse
-
-def xml_view(request):
-    queryset = Episode.objects.all()
-    queryset = serializers.serialize('xml', queryset)
-    return HttpResponse(queryset, content_type='application/xml')
-
-
-#def example(request):
-#    #print(request.GET)
-#    request.method == 'GET'
-#    print(request.GET['id'], 'ID in URL')
-#    queryset_podcast = Podcast.objects.filter(id = request.GET['id']).values('name', 'podcast_image')
-#    queryset_episode = Episode.objects.filter(podcast_id = request.GET['id']).values('name', 'published_date', 'episode_image', 'episode_mp3')
-#    #print(queryset_podcast, 'podcast printed')
-#    #print(queryset_episode, 'episodes list')
-#    print(list(queryset_podcast)[0]['name'], 'list podcast')
-#    podcast_name = list(queryset_podcast)[0]['name']
-#    print(podcast_name, 'podcast name')
-#    podcast_list_name = list(podcast_name)
-#    podcast_dict_name = podcast_name + "/>"
-#    print(podcast_dict_name, 'podcast dict name')
-#    print(podcast_list_name, 'podcast list name')
-#    #print(queryset_podcast.name, 'podcast name')
-#    #dict = {
-#        #'Podcast': queryset_podcast,
-#        #'Episode': queryset_episode
-#    #}
-#    dict = {
-#        '<podcast name = ': podcast_dict_name,
-#    }
-#    l = [queryset_podcast, queryset_episode]
-#    return HttpResponse('<podcast name = "' + podcast_name + '"> <episode name="episode 1"/>  <episode name="episode 2"/> <episode name="episode 3"/>  </podcast>')
-#    #print(dir(queryset_one))
-#    #return HttpResponse(value=podcast_name)
-#    #return HttpResponse('{<podcast name = "aaa" <episode name="Episode 1" <episode name = "Episode 2"/>}')
-#    #return HttpResponse('<queryset_podcast/>'.format(val))
-#    #return HttpResponse("{}".format(dict))
-#    #return HttpResponse(status=<100>, content="some content")
-#    #l1 = [podcast_name]
-#    #return HttpResponse("{}".format(l1))
-#    #return HttpResponse("{}".format('<podcast_name/>'))
-#    return HttpResponse ('{<podcast name = />}', podcast_name)
-
-def example(request):
+def xml_file(request):
     request.method = 'GET'
     queryset_podcast = Podcast.objects.filter(id = request.GET['id']).values('name')
     queryset_episode = Episode.objects.filter(podcast_id = request.GET['id']).values('name', 'published_date', 'episode_image', 'episode_mp3')
@@ -290,16 +178,15 @@ def example(request):
     episodes_list = list(queryset_episode)
     episodes = []
     host_ip = request.get_host()
-    print(host_ip, 'host IP')
-    ip = get_client_ip(request)
-    port = request.META['SERVER_PORT']
-    #for episode, media in (zip(episodes_list, episodes_media_list)):
-    #    episode_details = '<episode name = "' + episode['name'] + '"\n imgurl = ' + '"http://127.0.0.1:8000' + media.episode_image.url + '" \n audiourl = ' + '"http://127.0.0.1:8000' + media.episode_mp3.url + '"\n date = "' + str(episode['published_date']) + '"/>'
-    #    episodes.append(episode_details)
     for episode, media in (zip(episodes_list, episodes_media_list)):
-        episode_details = '  <item>' +'\n    <pubDate>' + str(episode['published_date']) + '</pubDate>' + '\n    <itunes:image href="' + request.scheme + '://' + host_ip + media.episode_image.url + '"/>' + '\n    <title>' + episode['name'] + '</title>' + '\n    <enclosure url="' + request.scheme + '://' + host_ip + media.episode_mp3.url +  '"/>' + '\n  </item>'
+        episode_details = '  <item>' +'\n    <pubDate>' + str(episode['published_date']) + '</pubDate>' + '\n  \
+            <itunes:image href="' + request.scheme + '://' + host_ip + media.episode_image.url + '"/>' + '\n    \
+            <title>' + episode['name'] + '</title>' + '\n    <enclosure url="' + request.scheme + '://' + host_ip \
+            + media.episode_mp3.url +  '"/>' + '\n  </item>'
         episodes.append(episode_details)    
     combined = "\n"
     combined = combined.join(episodes)
-    return HttpResponse('<rss version="2.0">' '\n <channel>' + '\n   <title>' + podcast_name + '</title>' + ' \n   <itunes:image href="' + request.scheme + '://' + host_ip + podcast_image_url + '"/> \n' +  combined + '\n </channel>' + '\n</rss>')
+    return HttpResponse('<rss version="2.0">' '\n <channel>' + '\n   <title>' + podcast_name + '</title>' + ' \n   \
+        <itunes:image href="' + request.scheme + '://' + host_ip + podcast_image_url + '"/> \n' +  combined \
+            + '\n </channel>' + '\n</rss>')
 

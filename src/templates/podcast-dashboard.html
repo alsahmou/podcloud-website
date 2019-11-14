@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block wrapper %} 
-<div class="wrap-dashboard100">
+    <div class="wrap-dashboard100">
 {% endblock %}
 
 {% block logo %}
@@ -11,19 +11,19 @@
 {% block content %}
 
 <div class="text-center txt5">
-    Link to podcast: {{ip}}{% url 'example' %}?id={{object.id}}
+    Link to podcast: {{ip}}{% url 'xml_file' %}?id={{object.id}}
 </div>
 
 <div class='row p-t-30'>
     <div class='col-4'>
-            <div class='square-image-cropper'>
-                    <img class='profile-image' src="{{ object.podcast_image.url }}" alt='Podcast Image'>
-                </div>
+        <div class='square-image-cropper'>
+            <img class='profile-image' src="{{ object.podcast_image.url }}" alt='Podcast Image'>
+        </div>
     </div>
     <div class='col-8 podcast-info'>
         <div class='row'>
-                {{ object.name|title }}
-            </div>
+            {{ object.name|title }}
+        </div>
         <div class='row txt1'>
             <div>
               By {{ object.author|title }}
@@ -52,15 +52,15 @@
 <div class='row'>
     <div class='col-4'>
         <div class='hovereffect'>
-                <div class='square-image-cropper'>
-                    <img class='square-image' src="{{ instance.episode_image.url }}" alt='Episode Image'>
-                </div>
+            <div class='square-image-cropper'>
+                <img class='square-image' src="{{ instance.episode_image.url }}" alt='Episode Image'>
+            </div>
         </div>
     </div>
     <div class='col-8 podcast-info'>   
         <div class='row'>
-                {{ instance.name|title }}
-            </div>
+            {{ instance.name|title }}
+        </div>
         <div class='row txt1'>
             {{ instance.published_date}}
         </div>
@@ -70,8 +70,9 @@
             </div>
         </div>
     </div>
-    <a class='txt1' href="/episode/{{ instance.id }}/delete">
-    <div class='wrap-input100' id='my-podcasts-each'>Delete Episode?
+
+    <a class='txt1' href="/user-dashboard/episode/{{ instance.id }}/delete">
+        <div class='wrap-input100' id='my-podcasts-each'>Delete Episode?
     </a>
 </div>
 </div>
@@ -79,40 +80,19 @@
 {% endfor %}
 
 <div class="container-login100-form-btn p-t-20">
-        <a href='/podcast/{{ object.id }}/create_episode/'>
+    <a href='/user-dashboard/podcast/{{ object.id }}/create_episode/'>
         <button class="login100-form-btn" type='submit' value='Login'>
-                Create Episode
-        </button></a>
-    </div>
+            Create Episode
+        </button>
+    </a>
+</div>
 
 <div class="text-center p-t-20">
-        <a class="txt1" href="/login">
-            Want to logout?
-        </a>
-    </div>
-
-
-<!--
-<p>{{ip}}{% url 'example' %}?id={{object.id}}</p>
-
-
-<p> {{ object.name }}</p>
-<p> {{ object.description }}</p>
-<img src="{{ object.podcast_image.url }}"/>
-<p> {{ object.published_date }}</p>
-<p> {{ object.author }}</p>
-
-<a class="btn btn-primary" href="/podcast/{{ object.id }}/create_episode">Create Episode</a>
-<a class="btn btn-primary"  href="/podcast/{{ object.id }}/delete">Delete Podcast</a>
-
-{% for instance in object_list %}
-    <a class="btn btn-primary" href="/episode/{{ instance.id }}">{{ instance.name }}</a>
-{% endfor %}
-
-<div class='col-2'>
-    <a class="btn btn-primary" href="/login">Logout</a>
+    <a class="txt1" href="/login">
+        Want to logout?
+    </a>
 </div>
--->
+
 
 {% endblock %}
 

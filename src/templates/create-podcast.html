@@ -3,8 +3,6 @@
 
 {% block content %}
 <form method='POST' enctype='multipart/form-data'> {% csrf_token %}
-
-    
     
     <span class="login100-form-title p-b-34 p-t-27">
         Create Podcast 
@@ -16,9 +14,9 @@
     </div>
     
     {% if userForm.name.errors %}
-    <div class="form-error">
-        {{ userForm.name.errors }}
-    </div>
+        <div class="form-error">
+            {{ userForm.name.errors }}
+        </div>
     {% endif %}
 
     <div class="wrap-input100 validate-input">
@@ -27,9 +25,9 @@
     </div>
 
     {% if userForm.author.errors %}
-    <div class="form-error">
-        {{ userForm.author.errors }}
-    </div>
+        <div class="form-error">
+            {{ userForm.author.errors }}
+        </div>
     {% endif %}
 
 
@@ -39,9 +37,9 @@
     </div>
 
     {% if userForm.published_date.errors %}
-    <div class="form-error">
-        {{ userForm.published_date.errors }}
-    </div>
+        <div class="form-error">
+            {{ userForm.published_date.errors }}
+        </div>
     {% endif %}
 
 
@@ -51,9 +49,9 @@
     </div>
 
     {% if userForm.description.errors %}
-    <div class="form-error">
-        {{ userForm.description.errors }}
-    </div>
+        <div class="form-error">
+            {{ userForm.description.errors }}
+        </div>
     {% endif %}
 
 
@@ -66,9 +64,9 @@
     </div>
 
     {% if userForm.podcast_image.errors %}
-    <div class="form-error">
-        {{ userForm.podcast_image.errors }}
-    </div>
+        <div class="form-error">
+            {{ userForm.podcast_image.errors }}
+        </div>
     {% endif %}
 
    
