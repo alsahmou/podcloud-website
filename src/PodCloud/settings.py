@@ -11,8 +11,12 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
- 
+import json
 
+with open ('PodCloud/config.json') as f:
+    input_keys = json.loads(f.read())
+    SECRET_KEY = input_keys['SECRET_KEY']
+    DATABASES = input_keys['DATABASES']
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -23,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'xwsnbn-*i)*t%oi%+%tc8qi-pbs)0kg_4==6ykv1vsoe+jao5r'
+#SECRET_KEY = 'xwsnbn-*i)*t%oi%+%tc8qi-pbs)0kg_4==6ykv1vsoe+jao5r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -77,16 +81,16 @@ WSGI_APPLICATION = 'PodCloud.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'podcast', 
-        'USER': 'cfa',
-        'PASSWORD': 'password',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'podcast', 
+#        'USER': 'cfa',
+#        'PASSWORD': 'password',
+#        'HOST': '127.0.0.1',
+#        'PORT': '5432',
+#    }
+#}
 
 
 # Password validation

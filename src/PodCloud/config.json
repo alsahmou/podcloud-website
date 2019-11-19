@@ -1,0 +1,14 @@
+{
+    "SECRET_KEY": "'xwsnbn-*i)*t%oi%+%tc8qi-pbs)0kg_4==6ykv1vsoe+jao5r'",
+
+    "DATABASES" : {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "podcast", 
+            "USER": "cfa",
+            "PASSWORD": "password",
+            "HOST": "127.0.0.1",
+            "PORT": "5432"
+        }
+    }
+}
