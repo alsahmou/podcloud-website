@@ -30,7 +30,7 @@ from podusers.views import (
     create_episode_view, 
     delete_podcast_view, 
     delete_episode_view,
-    xml_file 
+    server_podcast_rss_feed 
 )     
 
 urlpatterns = [
@@ -45,8 +45,8 @@ urlpatterns = [
     path('user-dashboard/podcast/<int:id>/create_episode/', create_episode_view, name='create_episode'),
     path('podcast/<int:id>/delete/', delete_podcast_view, name='podcast_delete'),
     path('user-dashboard/episode/<int:id>/delete/', delete_episode_view, name='episode_delete'),
-    path('episode/xml', xml_file, name='xml_file' ),
-    path('podcast-xml', xml_file, name='example')
+    path('podcast/xml', server_podcast_rss_feed, name='xml_file' ),
+    path('podcast-xml', server_podcast_rss_feed, name='example')
 ]
 
 urlpatterns += staticfiles_urlpatterns()

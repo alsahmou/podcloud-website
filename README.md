@@ -1,6 +1,12 @@
 # PodCloud Website
 
-This website allows users to upload their podcasts and their respective episodes to generate RSS feeds with XML files, enabling users to listen to their podcasts using podcasts mobile phone application. 
+This website allows users to upload their podcasts and their respective episodes to generate RSS feeds with XML files, enabling users to listen to their podcasts using podcasts mobile phone application.
+
+<img src="https://i.imgur.com/iTqqm47.png" width="40%">.
+<img src="https://i.imgur.com/GCovtE2.png" width="40%">.
+<img src="https://i.imgur.com/5QsHiqa.png" width="40%">.
+
+
 
 # Setup
 
@@ -52,19 +58,23 @@ This website allows users to upload their podcasts and their respective episodes
  - Grant all database privileges on your database to your user by entering the following command inside the postgres prompt, replace mydb and myuser with your own database name and your username:
  `GRANT ALL PRIVILEGES ON DATABASE mydb to myuser`
 
- - Change your database settings in settings.py file to the following to use your postgreSQL database, replace myuser, my pass and mydb with your own values.
+ - Store 'SECRET_KEY' from settings.py file in a secure place then, delete 'DATABASES' and 'SECRET_KEY' from settings.py file to the following to use your postgreSQL database and secret key. Put them in a json.config file and replace SECRET_KEY, NAME, USER and PASSWORD with your own values.
  
 ```
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydb', 
-        'USER': 'myuser',
-        'PASSWORD': 'mypass',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+{
+    "SECRET_KEY": "'#####'",
+
+    "DATABASES" : {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "#####", 
+            "USER": "#####",
+            "PASSWORD": "#####",
+            "HOST": "127.0.0.1",
+            "PORT": "5432"
+        }
     }
-} 
+}
 ```
 
  - To finalize the database setup, open the terminal and start the virtual environment then enter the following command.

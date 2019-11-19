@@ -5,10 +5,10 @@ from django.forms import Field
 from django.utils.translation import ugettext_lazy
 import hashlib
 
-#UserForm is what is visibile to the user
-#Form is what is sent to the DB
+# UserForm is what is visibile to the user
+# Form is what is sent to the DB
 
-#Poduser model forms
+# Poduser model forms
 class PoduserForm(forms.ModelForm):
     class Meta: 
         model = Poduser
@@ -42,7 +42,7 @@ class PoduserForm(forms.ModelForm):
                 "password and password_confirmation does not match"
             )
       
-#Login form
+# Login form
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
@@ -51,8 +51,8 @@ class LoginForm(forms.Form):
         'password'
     ]
  
-#Podcast model forms
-#Form to be inputted into the DB
+# Podcast model forms
+# Form to be inputted into the DB
 class PodcastForm(forms.ModelForm):
     class Meta: 
         model = Podcast
@@ -64,7 +64,7 @@ class PodcastForm(forms.ModelForm):
             'published_date',
             'podcast_image', 
         ]
-#Form inputted by the user
+# Form inputted by the user
 class UserPodcastForm(forms.Form):
     name = forms.CharField()
     description = forms.CharField(required=False)
@@ -80,8 +80,8 @@ class UserPodcastForm(forms.Form):
         'podcast_image',
     ]
 
-#Episode model forms
-#Form to be inputted into the DB
+# Episode model forms
+# Form to be inputted into the DB
 class EpisodeForm(forms.ModelForm):
     class Meta:
         model = Episode
@@ -94,7 +94,7 @@ class EpisodeForm(forms.ModelForm):
             'published_date'
         ]
 
-#Form inputted by the user  
+# Form inputted by the user  
 class UserEpisodeForm(forms.Form):
     name = forms.CharField()
     description = forms.CharField(required=False)
