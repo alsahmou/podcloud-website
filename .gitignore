@@ -1,3 +1,5 @@
 bin
 lib
 config.json
+migrations
+__pycache__
