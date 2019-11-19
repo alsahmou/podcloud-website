@@ -42,7 +42,7 @@ class PoduserForm(forms.ModelForm):
                 "password and password_confirmation does not match"
             )
       
-
+#Login form
 class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
@@ -52,6 +52,7 @@ class LoginForm(forms.Form):
     ]
  
 #Podcast model forms
+#Form to be inputted into the DB
 class PodcastForm(forms.ModelForm):
     class Meta: 
         model = Podcast
@@ -63,7 +64,7 @@ class PodcastForm(forms.ModelForm):
             'published_date',
             'podcast_image', 
         ]
-
+#Form inputted by the user
 class UserPodcastForm(forms.Form):
     name = forms.CharField()
     description = forms.CharField(required=False)
@@ -80,6 +81,7 @@ class UserPodcastForm(forms.Form):
     ]
 
 #Episode model forms
+#Form to be inputted into the DB
 class EpisodeForm(forms.ModelForm):
     class Meta:
         model = Episode
@@ -91,7 +93,8 @@ class EpisodeForm(forms.ModelForm):
             'episode_image',
             'published_date'
         ]
-    
+
+#Form inputted by the user  
 class UserEpisodeForm(forms.Form):
     name = forms.CharField()
     description = forms.CharField(required=False)

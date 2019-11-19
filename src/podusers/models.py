@@ -16,7 +16,7 @@ class Poduser(models.Model):
     password = models.CharField(max_length=200, null=True)
     password_confirmation = models.CharField(max_length=200, null=True)
     
-
+    
 class Podcast(models.Model):
     username = models.CharField(max_length=20, null=True)
     podcast_image = models.ImageField(blank=True, null=True, default='Mic.png')

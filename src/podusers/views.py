@@ -7,15 +7,15 @@ from ipware import get_client_ip
 import hashlib  
 
 
-
+#Home page
 def home_view(request, *args, **kwargs):
-    print('page rendered')
     return render(request, "home.html", {})
 
+#Forgot password page
 def forgot_password_view(request, *args, **kwargs):
     return render(request, 'forgot-password.html', {})
 
-
+#Creates a new account 
 def signup_view(request):
     username = None
     if request.method == 'GET':
@@ -41,6 +41,7 @@ def signup_view(request):
     }
     return render(request, 'signup.html', context) 
 
+#Logs in the user into their account
 def login_view(request, *args, **kwargs):
     username = None 
     form = LoginForm(request.POST or None, request.FILES)
@@ -63,6 +64,7 @@ def login_view(request, *args, **kwargs):
     }
     return render(request, 'login.html', context)
 
+#Shows user's dashboard with podcasts listed 
 def user_view(request, *args, **kwargs):
     if 'username' in request.session:
         username = request.session['username']
@@ -75,6 +77,9 @@ def user_view(request, *args, **kwargs):
     }
     return render(request, "user-dashboard.html", context)
 
+#Creates a podcast
+#User inputs into UserForm and then the inputs + username are put in the POST request to be inputted
+#into the DB using form
 def create_podcast_view (request):
     if request.method == 'GET':
         userForm = UserPodcastForm()
@@ -103,7 +108,9 @@ def create_podcast_view (request):
     }
     return render(request, 'create-podcast.html', context)
 
-
+#Creates a new episode
+#User inputs into UserForm and then the inputs + podcast id are put in the POST request to be inputted
+#into the DB using form
 def create_episode_view(request, id):
     if request.method == 'GET':
         userForm = UserEpisodeForm()
@@ -134,7 +141,7 @@ def create_episode_view(request, id):
     }
     return render(request, 'create-episode.html', context)
 
-    
+#Shows the podcast with its episodes and details    
 def podcast_view(request, id):
     obj = Podcast.objects.get(id=id)
     queryset = Episode.objects.filter(podcast_id = id)
@@ -146,7 +153,7 @@ def podcast_view(request, id):
     }
     return render(request, 'podcast-dashboard.html', context)
 
-
+#Deletes podcasts
 def delete_podcast_view(request, id):
     obj = get_object_or_404(Podcast, id=id)
     if request.method == 'POST':
@@ -157,6 +164,7 @@ def delete_podcast_view(request, id):
     }
     return render(request, 'delete-podcast.html', context)
 
+#Deletes episodes
 def delete_episode_view(request, id):
     obj = get_object_or_404(Episode, id=id)
     if request.method == 'POST':
@@ -167,7 +175,7 @@ def delete_episode_view(request, id):
     }
     return render(request, 'delete-episode.html', context)
 
-
+#Returns XML file as a string 
 def xml_file(request):
     request.method = 'GET'
     queryset_podcast = Podcast.objects.filter(id = request.GET['id']).values('name')
