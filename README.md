@@ -84,7 +84,7 @@ This website allows users to upload their podcasts and their respective episodes
  `$ curl ifconfig.me`
 
 
-#Run Website
+# Run Website
 - To start the website start your virtual environment then enter the following command, replace ip and port with your own ip address:
  `$ python3 manage.py runserver ip:8000`
 
